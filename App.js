@@ -7,8 +7,10 @@
  */
 
 import React from 'react';
-import {Platform, StyleSheet} from 'react-native';
+import {Platform, StyleSheet,View} from 'react-native';
 import Header from './src/components/Header'
+import SeriesList from './src/components/SeriesList'
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,7 +20,10 @@ const instructions = Platform.select({
 });
 
 const App = () => (
-  <Header header={"Series!"}/>
+  <View>
+    <Header header={"Series!"} />
+    <SeriesList/>
+  </View>
   
 )
 
