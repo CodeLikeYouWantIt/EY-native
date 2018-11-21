@@ -1,15 +1,20 @@
 import React,{ Component } from 'react'
-import  { Text,View,Image } from 'react-native'
+import  {View} from 'react-native'
+import SeriesDetail from './SeriesDetail'
 
 
 
 class SeriesList extends Component{
 
-        state = { 
-            series: [] 
-        }
+    state = { 
+        series: [] 
+    }
 
-    
+    renderSeriesList(){
+        return this.state.series.map((serie, index) =>
+         <SeriesDetail key={index} serie={serie}/>
+        )
+    }
 
     componentWillMount(){
         fetch("http://localhost:3000/series")
@@ -21,7 +26,7 @@ class SeriesList extends Component{
     render() {
         return (
             <View>
-                {this.state.series.map((serie,index)=> (<Text key={index}>{serie.title}</Text>))}
+                {this.renderSeriesList()}
             </View>
         )
     }
