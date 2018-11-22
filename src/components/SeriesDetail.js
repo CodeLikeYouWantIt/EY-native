@@ -7,9 +7,9 @@ import CardSection from './CardSection'
 const SeriesDetail = (props) => {
     return(
         <Card>
-            
+            <CardSection>
                 <Text>{props.serie.title}</Text>
-
+            </CardSection>
         </Card>
     )
 }
