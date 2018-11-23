@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text,Image,View} from 'react-native'
+import {Text,Image,View,ImageBackground} from 'react-native'
 import Card from './Card'
 import CardSection from './CardSection'
 
@@ -19,14 +19,14 @@ const SeriesDetail = ({serie}) => {
     return(
         <Card>
             <CardSection>  
-                <Image
+                <ImageBackground
                     style={image}
-                    source = {{uri:url}}
-                    blurRadius= {6}
-                />
-                <Text style={imageText}>
-                    {title}
-                </Text>
+                    source={{ uri: url }}
+                    blurRadius={6}>
+                    <Text style={imageText}>
+                        {title}
+                    </Text>
+                </ImageBackground>               
             </CardSection>
         </Card>
     )
@@ -34,8 +34,7 @@ const SeriesDetail = ({serie}) => {
 
 const styles = {
     center:{
-        justifyContent:'center',
-        alignItems:'center'
+        flex:1
     },
     headerContentStyle:{
         flexDirection:'column',
@@ -57,10 +56,11 @@ const styles = {
     image:{
         height:300,
         flex: 1,
-        width:null
+        width:null,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     imageText:{
-        position:'absolute',
         fontSize:30,
         color:'#fff'
     }
