@@ -20,7 +20,7 @@ const instructions = Platform.select({
 });
 
 const App = () => (
-  <View>
+  <View style={{flex:1}}>
     <Header header={"Series!"} />
     <SeriesList/>
   </View>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {View} from 'react-native'
+import {View, ImageBackground} from 'react-native'
 
 const CardSection = (props) => {
     return (
@@ -12,7 +12,7 @@ const CardSection = (props) => {
 const styles = {
     containerStyle:{
         borderBottomWidth:1,
-        padding:5,
+        padding:3,
         backgroundColor:'#fff',
         justifyContent:'flex-start',
         flexDirection:'row',

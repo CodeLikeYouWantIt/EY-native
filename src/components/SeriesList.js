@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import  {View} from 'react-native'
+import  {View,ScrollView} from 'react-native'
 import SeriesDetail from './SeriesDetail'
 
 
@@ -25,9 +25,9 @@ class SeriesList extends Component{
 
     render() {
         return (
-            <View>
-                {this.renderSeriesList()}
-            </View>
+            <ScrollView>
+                    {this.renderSeriesList()}
+            </ScrollView>
         )
     }
 }
