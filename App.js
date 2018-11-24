@@ -10,6 +10,7 @@ import React from 'react';
 import {Platform, StyleSheet,View} from 'react-native';
 import Header from './src/components/Header'
 import SeriesList from './src/components/SeriesList'
+import Posts from './src/components/Posts'
 
 
 const instructions = Platform.select({
@@ -22,7 +23,8 @@ const instructions = Platform.select({
 const App = () => (
   <View style={{flex:1}}>
     <Header header={"Series!"} />
-    <SeriesList/>
+    <Posts/>
+    {/* <SeriesList/> */}
   </View>
   
 )
