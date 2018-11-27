@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import {Text,View} from 'react-native'
+import Card from './Card'
+import CardSection from './CardSection'
 
-class Posts extends Component {
+
+class PostsList extends Component {
     
     constructor(){
         super();
@@ -10,12 +13,6 @@ class Posts extends Component {
             posts:[]
         }
     }
-
-    // renderPostsList(){
-    //     return this.state.posts.map((post, index) =>
-    //         <PostDetail key={index} post={post} />
-    //     )
-    // }
 
     componentWillMount() {
         fetch("http://localhost:3000/posts")
@@ -27,11 +24,12 @@ class Posts extends Component {
     render (){
         return (
             <View>
-                {this.state.posts.map((post, index)=>(<Text key={index}>{post.body}</Text>))}
+                {this.state.posts.map((post, index)=>(<Text key={index}>{post.body} {index}</Text>))}
             </View>
+
         )
     }
 }
 
 
-export default Posts;
+export default PostsList;
