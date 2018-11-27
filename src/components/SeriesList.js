@@ -3,17 +3,13 @@ import  {View,ScrollView} from 'react-native'
 import SeriesDetail from './SeriesDetail'
 
 
-
 class SeriesList extends Component{
 
-    state = { 
-        series: [] 
-    }
-
-    renderSeriesList(){
-        return this.state.series.map((serie, index) =>
-         <SeriesDetail key={index} serie={serie}/>
-        )
+    constructor(){
+        super()
+        this.state = { 
+            series: [] 
+        }
     }
 
     componentWillMount(){
@@ -21,6 +17,12 @@ class SeriesList extends Component{
         .then(response => response.json()).then((data)=>{
             this.setState({series:data})
         })
+    }
+    
+    renderSeriesList() {
+        return this.state.series.map((serie, index) =>
+            <SeriesDetail key={index} serie={serie} />
+        )
     }
 
     render() {
