@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text,Image,View,ImageBackground} from 'react-native'
-import Card from './Card'
-import CardSection from './CardSection'
-import Button from './Button'
+import {Text,ImageBackground,Linking} from 'react-native'
+import Card from '../common/Card'
+import CardSection from '../common/CardSection'
+import Button from '../common/Button'
 
 
 const SeriesDetail = ({serie}) => {
@@ -26,7 +26,10 @@ const SeriesDetail = ({serie}) => {
             </CardSection>
 
             <CardSection>
-                <Button />
+                <Button 
+                    onPress={()=>Linking.openURL(url)} 
+                    buttonText={"Click Me"}
+                />
             </CardSection>
         </Card>
     )

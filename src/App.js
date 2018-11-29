@@ -8,8 +8,8 @@
 
 import React from 'react';
 import {Platform, StyleSheet,View} from 'react-native';
-import Header from './src/components/Header'
-import SeriesList from './src/components/SeriesList'
+import Header from './common/Header'
+import SeriesList from './components/SeriesList'
 
 
 const instructions = Platform.select({
