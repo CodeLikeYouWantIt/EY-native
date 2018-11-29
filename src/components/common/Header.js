@@ -14,7 +14,10 @@ const Header = (props) => {
 
 const styles = {
     headerStyle:{
-        fontSize:25
+        fontSize:25,
+        flex: 1,
+        alignSelf: 'center',
+        paddingTop:10
     },
     viewStyle:{
         backgroundColor:'#f8f8f8',
