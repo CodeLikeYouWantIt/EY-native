@@ -11,7 +11,7 @@ class LoginForm extends Component {
             email:'',
             password:''
         }
-        this.state.onPress= this.state.onPress.bind(this)
+        this.onPress= this.onPress.bind(this)
     }
 
 
@@ -45,7 +45,7 @@ class LoginForm extends Component {
                 <CardSection>
                     <Button 
                         buttonText={"Login"}
-                        onPress={this.state.onPress()}
+                        onPress={this.state.onPress}
                     />
                 </CardSection>
 
