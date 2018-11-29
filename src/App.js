@@ -10,6 +10,7 @@ import React from 'react';
 import {Platform, StyleSheet,View} from 'react-native';
 import {Header} from './components/common'
 import SeriesList from './components/SeriesList'
+import LoginForm from './components/LoginForm'
 
 
 const instructions = Platform.select({
@@ -21,8 +22,9 @@ const instructions = Platform.select({
 
 const App = () => (
   <View style={{flex:1}}>
-    <Header header={"Series!"} />
-    <SeriesList/>
+    <Header header={"Login"}/>
+    <LoginForm/>
+    {/* <SeriesList/> */}
   </View>
   
 )
