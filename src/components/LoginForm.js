@@ -22,6 +22,7 @@ class LoginForm extends Component {
                         onChangeText={email => this.setState({email})}
                         placeHolder={"example@gmail.com"}
                         label={"Email"}
+                        secureTextEntry={false}
                     />
 
                 </CardSection>
@@ -30,6 +31,7 @@ class LoginForm extends Component {
                     <Input 
                         value={this.state.password}
                         onChangeText={ password => this.setState({ password })}
+                        secureTextEntry={true}
                         placeHolder={"ab23sXs"}
                         label={"Password"}                   
                     ></Input>                    
