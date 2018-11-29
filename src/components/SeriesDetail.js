@@ -2,6 +2,7 @@ import React from 'react';
 import {Text,Image,View,ImageBackground} from 'react-native'
 import Card from './Card'
 import CardSection from './CardSection'
+import Button from './Button'
 
 
 const SeriesDetail = ({serie}) => {
@@ -22,6 +23,10 @@ const SeriesDetail = ({serie}) => {
                         {title}
                     </Text>
                 </ImageBackground>               
+            </CardSection>
+
+            <CardSection>
+                <Button />
             </CardSection>
         </Card>
     )
