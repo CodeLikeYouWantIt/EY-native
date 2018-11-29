@@ -8,7 +8,7 @@
 
 import React from 'react';
 import {Platform, StyleSheet,View} from 'react-native';
-import Header from './common/Header'
+import {Header} from './components/common'
 import SeriesList from './components/SeriesList'
 
 
