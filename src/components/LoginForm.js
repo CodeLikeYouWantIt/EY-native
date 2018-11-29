@@ -11,8 +11,14 @@ class LoginForm extends Component {
             email:'',
             password:''
         }
-
+        this.state.onPress= this.state.onPress.bind(this)
     }
+
+
+    onPress() {
+        console.log(hello)
+    }
+
     render(){
         return(
             <Card>
@@ -22,7 +28,6 @@ class LoginForm extends Component {
                         onChangeText={email => this.setState({email})}
                         placeHolder={"example@gmail.com"}
                         label={"Email"}
-                        secureTextEntry={false}
                     />
 
                 </CardSection>
@@ -38,7 +43,10 @@ class LoginForm extends Component {
                 </CardSection>
 
                 <CardSection>
-                    <Button buttonText={"Login"}/>
+                    <Button 
+                        buttonText={"Login"}
+                        onPress={this.state.onPress()}
+                    />
                 </CardSection>
 
             </Card>
