@@ -1,11 +1,12 @@
 import React from 'react'
 import {Text,TouchableOpacity} from 'react-native'
 
-const Button = ()=>{
+const Button = (props)=>{
     const {buttonStyle,textStyle}=styles;
+
     return (
-        <TouchableOpacity style={buttonStyle}>
-            <Text style={textStyle}>Button .js</Text>
+        <TouchableOpacity onPress={props.onPress} style={buttonStyle}>
+            <Text style={textStyle}>{props.buttonText}</Text>
         </TouchableOpacity>
     )
 }
