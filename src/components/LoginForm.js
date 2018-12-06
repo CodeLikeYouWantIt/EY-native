@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import { Text } from 'react-native'
-import {Card, CardSection,Button,Header,Input} from './common'
+import {Card, CardSection,Button,Input} from './common'
 
 class LoginForm extends Component {
 
@@ -11,12 +11,11 @@ class LoginForm extends Component {
             email:'',
             password:'',
             status:'',
-            error:''
+            error:'',
+            loginAttempts:0
         }
         this.onLoginPress = this.onLoginPress.bind(this)
     }
-
-
 
     onLoginPress(e) {
         fetch('http://localhost:3000/login',{
@@ -34,18 +33,66 @@ class LoginForm extends Component {
         })
         .then(response => {
             if (response.ok){
-                this.setState({status:"Boo ya!", error:''})
-            } else {
-                this.setState({status:"Uh oh..."})
+                this.setState({ error:'',count:0})
             }
             if (!response.ok) { throw response }
         })
         .catch(err => {
-            this.setState({
-                error: err.text()._55
-            })
+            this.authFailed(err)
+            this.increaseLoginAttempts()
+            this.clearFields()
         })
     }
+    
+    authFailed(err){
+        {
+            this.setState({
+                error:''
+            })
+
+            if(this.state.email === "" && this.state.password === ""){
+                this.setState({
+                    error:"Please fill out required fields"
+                })
+            } else {
+                this.setState({
+                    error: err.text()._55
+                })
+            }
+        }
+    }
+
+    clearFields(){
+        {
+        if(this.state.error === "Incorrect Password"){
+            this.setState({
+                password:''
+            })
+        } else {
+            this.setState({
+                email:'',
+                password:''
+            })
+        }
+    }
+    }
+
+    tooManyLoginAttempts(){
+        {
+            if(this.state.loginAttempts>3){
+              return  (<Text>Too many failed attempts</Text>)
+            }
+        }
+    }
+
+    increaseLoginAttempts(){
+        {
+            if(this.state.status ==="failed"){
+                this.state.loginAttempts += 1
+            }
+        }
+    }
+
    
 
     render(){
@@ -71,18 +118,17 @@ class LoginForm extends Component {
                     ></Input>                    
                 </CardSection>
 
+                <Text style={styles.errorMessage}>
+                    {this.state.error}
+                </Text>
+
                 <CardSection>
                     <Button 
                         buttonText={"Login"}
                         onPress={this.onLoginPress}
                     />
                 </CardSection>
-                <Card>
-                    <CardSection>
-                        <Text style={styles.errorMessage}>{this.state.status}</Text>
-                        <Text style={styles.errorMessage}>{this.state.error}</Text>
-                    </CardSection>
-                </Card>
+
             </Card>
         )
     }
@@ -91,9 +137,8 @@ class LoginForm extends Component {
 const styles = {
     errorMessage:{
         color:'red',
-        fontSize:23,
+        fontSize:20,
         alignSelf:'center',
-        flex:1
     }
 }
 
