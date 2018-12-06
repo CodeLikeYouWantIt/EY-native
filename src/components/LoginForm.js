@@ -15,6 +15,7 @@ class LoginForm extends Component {
             loginAttempts:0
         }
         this.onLoginPress = this.onLoginPress.bind(this)
+        this.onLoginSuccess = this.onLoginSuccess.bind(this)
     }
 
     onLoginPress(e) {
@@ -33,7 +34,7 @@ class LoginForm extends Component {
         })
         .then(response => {
             if (response.ok){
-                this.setState({ error:'',count:0})
+                this.onLoginSuccess()
             }
             if (!response.ok) { throw response }
         })
@@ -44,26 +45,31 @@ class LoginForm extends Component {
         })
     }
     
+    onLoginSuccess(){
+        this.setState({
+            email:'',
+            password:'',
+            loading:false,
+            error:''
+        })
+    }
     authFailed(err){
-        {
-            this.setState({
-                error:''
-            })
+        this.setState({
+            error:''
+        })
 
-            if(this.state.email === "" && this.state.password === ""){
-                this.setState({
-                    error:"Please fill out required fields"
-                })
-            } else {
-                this.setState({
-                    error: err.text()._55
-                })
-            }
+        if(this.state.email === "" && this.state.password === ""){
+            this.setState({
+                error:"Please fill out required fields"
+            })
+        } else {
+            this.setState({
+                error: err.text()._55
+            })
         }
     }
 
     clearFields(){
-        {
         if(this.state.error === "Incorrect Password"){
             this.setState({
                 password:''
@@ -75,21 +81,16 @@ class LoginForm extends Component {
             })
         }
     }
-    }
 
     tooManyLoginAttempts(){
-        {
-            if(this.state.loginAttempts>3){
-              return  (<Text>Too many failed attempts</Text>)
-            }
+        if(this.state.loginAttempts>3){
+            return  (<Text>Too many failed attempts</Text>)
         }
     }
 
     increaseLoginAttempts(){
-        {
-            if(this.state.status ==="failed"){
-                this.state.loginAttempts += 1
-            }
+        if(this.state.status ==="failed"){
+            this.state.loginAttempts += 1
         }
     }
 
