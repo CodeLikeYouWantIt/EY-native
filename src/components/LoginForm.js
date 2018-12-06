@@ -123,7 +123,6 @@ class LoginForm extends Component {
                     <Input 
                         value={this.state.email}
                         onChangeText={email => this.setState({email})}
-                        placeHolder={"example@gmail.com"}
                         label={"Email"}
                     />
 
@@ -134,7 +133,6 @@ class LoginForm extends Component {
                         value={this.state.password}
                         onChangeText={ password => this.setState({ password })}
                         secureTextEntry={true}
-                        placeHolder={"ab23sXs"}
                         label={"Password"}                   
                     ></Input>                    
                 </CardSection>
