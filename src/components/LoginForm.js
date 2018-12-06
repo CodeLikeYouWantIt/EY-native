@@ -39,7 +39,7 @@ class LoginForm extends Component {
             if (!response.ok) { throw response }
         })
         .catch(err => {
-            this.authFailed(err)
+            this.onLoginFail(err)
             this.increaseLoginAttempts()
             this.clearFields()
         })
@@ -53,18 +53,21 @@ class LoginForm extends Component {
             error:''
         })
     }
-    authFailed(err){
+
+    onLoginFail(err){
         this.setState({
             error:''
         })
 
         if(this.state.email === "" && this.state.password === ""){
             this.setState({
-                error:"Please fill out required fields"
+                error:"Please fill out required fields",
+                loading:false
             })
         } else {
             this.setState({
-                error: err.text()._55
+                error: err.text()._55,
+                loading:false
             })
         }
     }
