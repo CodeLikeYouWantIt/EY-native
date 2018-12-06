@@ -13,7 +13,8 @@ class LoginForm extends Component {
             status:'',
             error:'',
             loading:false,
-            loginAttempts:0
+            loginAttempts:0,
+            authTOKEN:''
         }
         this.onLoginPress = this.onLoginPress.bind(this)
         this.onLoginSuccess = this.onLoginSuccess.bind(this)
@@ -23,22 +24,20 @@ class LoginForm extends Component {
         this.setState({
             loading:true
         })
-        fetch('http://localhost:3000/login',{
+        fetch('http://localhost:3000/authenticate',{
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                session: {
-                    email: this.state.email,
-                    password: this.state.password
-                }
+                email: this.state.email,
+                password: this.state.password
             })
         })
         .then(response => {
             if (response.ok){
-                this.onLoginSuccess()
+                this.onLoginSuccess(response)
             }
             if (!response.ok) { throw response }
         })
@@ -49,12 +48,13 @@ class LoginForm extends Component {
         })
     }
     
-    onLoginSuccess(){
+    onLoginSuccess(response){
         this.setState({
             email:'',
             password:'',
             loading:false,
-            error:''
+            error:'',
+            authTOKEN: JSON.parse(response._bodyInit).auth_token
         })
     }
 
@@ -138,7 +138,7 @@ class LoginForm extends Component {
                 </CardSection>
 
                 <Text style={styles.errorMessage}>
-                    {this.state.error}
+                    {this.state.authTOKEN}
                 </Text>
 
                 <CardSection>
