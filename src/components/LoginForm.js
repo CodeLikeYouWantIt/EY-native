@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import { Text } from 'react-native'
-import {Card, CardSection,Button,Input} from './common'
+import {Card, CardSection,Button,Input,Spinner} from './common'
 
 class LoginForm extends Component {
 
@@ -12,6 +12,7 @@ class LoginForm extends Component {
             password:'',
             status:'',
             error:'',
+            loading:false,
             loginAttempts:0
         }
         this.onLoginPress = this.onLoginPress.bind(this)
@@ -19,6 +20,9 @@ class LoginForm extends Component {
     }
 
     onLoginPress(e) {
+        this.setState({
+            loading:true
+        })
         fetch('http://localhost:3000/login',{
             method: 'POST',
             headers: {
@@ -97,6 +101,19 @@ class LoginForm extends Component {
         }
     }
 
+    renderButton(){
+        if(this.state.loading){
+            return <Spinner size={"small"}/>
+        }
+
+        return(
+            <Button
+                buttonText={"Login"}
+                onPress={this.onLoginPress}
+            />
+        )
+    }
+
    
 
     render(){
@@ -127,10 +144,7 @@ class LoginForm extends Component {
                 </Text>
 
                 <CardSection>
-                    <Button 
-                        buttonText={"Login"}
-                        onPress={this.onLoginPress}
-                    />
+                    {this.renderButton()}
                 </CardSection>
 
             </Card>
