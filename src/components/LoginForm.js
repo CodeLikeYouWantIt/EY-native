@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import { Text } from 'react-native'
 import { connect } from 'react-redux'
-import { onEmailChanged, onPasswordChanged, clearEmailState} from '../actions'
+import { onEmailChanged, onPasswordChanged, clearEmail} from '../actions'
 import {Card, CardSection,Button,Input,Spinner} from './common'
 class LoginForm extends Component {
 
@@ -28,8 +28,8 @@ class LoginForm extends Component {
         this.props.onPasswordChanged(text)
     }
 
-    clearEmailState(){
-        this.props.clearEmailState()
+    clearEmail(){
+        this.props.clearEmail()
     }
 
     onLoginPress(e) {
@@ -49,7 +49,7 @@ class LoginForm extends Component {
         })
         .then(response => {
             if (response.ok){
-                this.clearEmailState()
+                this.clearEmail()
                 this.onLoginSuccess(response)
             }
             if (!response.ok) { throw response }
@@ -179,5 +179,5 @@ const mapStateToProps = state =>{
 export default connect(mapStateToProps,{
     onEmailChanged,
     onPasswordChanged,
-    clearEmailState
+    clearEmail
 })(LoginForm);
