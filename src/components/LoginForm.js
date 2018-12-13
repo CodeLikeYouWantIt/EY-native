@@ -1,15 +1,14 @@
 import React,{Component} from 'react'
 import { Text } from 'react-native'
+import { connect } from 'react-redux'
+import { onEmailChanged, onPasswordChanged, clearEmailState} from '../actions'
 import {Card, CardSection,Button,Input,Spinner} from './common'
-
 class LoginForm extends Component {
 
     constructor(props){
         super(props);
         
         this.state={
-            email:'',
-            password:'',
             status:'',
             error:'',
             loading:false,
@@ -18,6 +17,19 @@ class LoginForm extends Component {
         }
         this.onLoginPress = this.onLoginPress.bind(this)
         this.onLoginSuccess = this.onLoginSuccess.bind(this)
+    }
+
+
+    onEmailChanged(text){
+        this.props.onEmailChanged(text)
+    }
+
+    onPasswordChanged(text){
+        this.props.onPasswordChanged(text)
+    }
+
+    clearEmailState(){
+        this.props.clearEmailState()
     }
 
     onLoginPress(e) {
@@ -31,12 +43,13 @@ class LoginForm extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password
+                email: this.props.email,
+                password: this.props.password
             })
         })
         .then(response => {
             if (response.ok){
+                this.clearEmailState()
                 this.onLoginSuccess(response)
             }
             if (!response.ok) { throw response }
@@ -50,8 +63,6 @@ class LoginForm extends Component {
     
     onLoginSuccess(response){
         this.setState({
-            email:'',
-            password:'',
             loading:false,
             error:'',
             authTOKEN: JSON.parse(response._bodyInit).auth_token
@@ -63,7 +74,7 @@ class LoginForm extends Component {
             error:''
         })
 
-        if(this.state.email === "" && this.state.password === ""){
+        if(this.props.email === "" && this.props.password === ""){
             this.setState({
                 error:"Please fill out required fields",
                 loading:false
@@ -121,24 +132,24 @@ class LoginForm extends Component {
             <Card>
                 <CardSection>
                     <Input 
-                        value={this.state.email}
-                        onChangeText={email => this.setState({email})}
+                        onChangeText={this.onEmailChanged.bind(this)}
                         label={"Email"}
+                        value={this.props.email}
                     />
 
                 </CardSection>
                 
                 <CardSection>
                     <Input 
-                        value={this.state.password}
-                        onChangeText={ password => this.setState({ password })}
+                        onChangeText={ this.onPasswordChanged.bind(this)}
                         secureTextEntry={true}
-                        label={"Password"}                   
+                        label={"Password"}   
+                        value={this.props.password}                
                     ></Input>                    
                 </CardSection>
 
                 <Text style={styles.errorMessage}>
-                    {this.state.authTOKEN}
+                    {this.state.error}
                 </Text>
 
                 <CardSection>
@@ -158,4 +169,15 @@ const styles = {
     }
 }
 
-export default LoginForm;
+const mapStateToProps = state =>{
+    return{
+        email:state.auth.email,
+        password:state.auth.password
+    }
+}
+
+export default connect(mapStateToProps,{
+    onEmailChanged,
+    onPasswordChanged,
+    clearEmailState
+})(LoginForm);
