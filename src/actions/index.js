@@ -1,7 +1,6 @@
 import {
     EMAIL_CHANGED,
     PASSWORD_CHANGED,
-    AUTH_TOKEN,
     LOGIN_USER_SUCCESS,
     LOGIN_USER,
     LOGIN_USER_FAIL
@@ -18,13 +17,6 @@ export const onPasswordChanged = (text) => {
     return {
         type:PASSWORD_CHANGED,
         payload:text
-    }
-}
-
-export const storeAuthToken = (text) => {
-    return {
-        type: AUTH_TOKEN,
-        payload: text
     }
 }
 
@@ -46,7 +38,7 @@ export const loginUser= ({email,password}) =>{
         .then(user => {
             dispatch({
                 type:LOGIN_USER_SUCCESS,
-                payload: JSON.parse(user._bodyInit).auth_token
+                payload: JSON.parse(user._bodyInit)
             })
         }).catch(() =>{
             fetch('http://localhost:3000/authenticate', {
