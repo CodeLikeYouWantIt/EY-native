@@ -7,11 +7,11 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet,View, Text} from 'react-native';
+import {Platform,View} from 'react-native';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
-import { connect } from 'react-redux'
+import ReduxThunk from 'redux-thunk'
 import {Header} from './components/common'
 import SeriesList from './components/SeriesList'
 import LoginForm from './components/LoginForm'
@@ -25,8 +25,9 @@ const instructions = Platform.select({
 
 class App extends Component {
   render(){
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
     return(
-    <Provider store={createStore(reducers)}>
+    <Provider store={store}>
       <View style={{flex:1}}>
         <LoginForm/>
       </View>

@@ -1,13 +1,14 @@
 import { EMAIL_CHANGED,
          PASSWORD_CHANGED,
          ERROR_MESSAGE,
-         CLEAR_ERROR,
          LOADING, 
-         AUTH_TOKEN } from '../actions/types'
+         AUTH_TOKEN, 
+         LOGIN_USER_SUCCESS} from '../actions/types'
 
-const INITIAL_STATE = {email:'',password:'',error:'',loading:false, authToken: ''}
+const INITIAL_STATE = {email:'',password:'',error:'',loading:false, authToken: '',}
 
 export default (state= INITIAL_STATE,action) => {
+    console.log(action)
     switch(action.type){
         case EMAIL_CHANGED:
             return {...state, email:action.payload}
@@ -18,14 +19,11 @@ export default (state= INITIAL_STATE,action) => {
         case ERROR_MESSAGE:
             return {...state, error:action.payload}
 
-        case CLEAR_ERROR:
-            return  {...state, error:action.payload}
-
         case LOADING:
             return { ...state, loading: action.payload }
 
-        case AUTH_TOKEN:
-            return { ...state, authToken: action.payload }
+        case LOGIN_USER_SUCCESS:
+            return {...state, authToken: action.payload, error:''}
 
         default:
         return state
