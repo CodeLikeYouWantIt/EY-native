@@ -83,16 +83,11 @@ const styles = {
     }
 }
 
-const mapStateToProps = state =>{
-    return{
-        email:state.auth.email,
-        password:state.auth.password,
-        error:state.auth.error,
-        loading:state.auth.loading,
-        authToken:state.auth.authToken,
-        user:state.auth.user
-    }
+const mapStateToProps = ({ auth }) => {
+    const { email, password, error, loading } = auth
+    return { email, password, error, loading }
 }
+
 
 export default connect(mapStateToProps,{
     onEmailChanged,
