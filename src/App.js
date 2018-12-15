@@ -15,6 +15,8 @@ import ReduxThunk from 'redux-thunk'
 import {Header} from './components/common'
 import SeriesList from './components/SeriesList'
 import LoginForm from './components/LoginForm'
+import RouterComponent from './Router'
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -29,7 +31,7 @@ class App extends Component {
     return(
     <Provider store={store}>
       <View style={{flex:1}}>
-        <LoginForm/>
+        <RouterComponent/>
       </View>
     </Provider>
       
