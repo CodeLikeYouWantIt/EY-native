@@ -1,10 +1,10 @@
 import {
     EMAIL_CHANGED,
     PASSWORD_CHANGED,
-    ERROR_MESSAGE,
-    LOADING,
     AUTH_TOKEN,
-    LOGIN_USER_SUCCESS
+    LOGIN_USER_SUCCESS,
+    LOGIN_USER,
+    LOGIN_USER_FAIL
         } from './types'
 
 export const onEmailChanged = (text) => {
@@ -21,13 +21,6 @@ export const onPasswordChanged = (text) => {
     }
 }
 
-export const isLoading = (text) => {
-    return {
-        type: LOADING,
-        payload: text
-    }
-}
-
 export const storeAuthToken = (text) => {
     return {
         type: AUTH_TOKEN,
@@ -37,6 +30,8 @@ export const storeAuthToken = (text) => {
 
 export const loginUser= ({email,password}) =>{
     return (dispatch)=>{
+        dispatch({type:LOGIN_USER})
+
         fetch('http://localhost:3000/authenticate',{
             method: 'POST',
             headers: {
@@ -66,7 +61,7 @@ export const loginUser= ({email,password}) =>{
                 })
             }).then(error => {
                 dispatch({
-                    type: ERROR_MESSAGE,
+                    type: LOGIN_USER_FAIL,
                     payload: error._bodyInit
                 })
             })
