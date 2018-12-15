@@ -1,6 +1,5 @@
 import { EMAIL_CHANGED,
          PASSWORD_CHANGED,
-         ERROR_MESSAGE,
          AUTH_TOKEN, 
          LOGIN_USER_SUCCESS,
          LOGIN_USER_FAIL,
