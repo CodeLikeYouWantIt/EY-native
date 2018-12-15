@@ -11,11 +11,10 @@ import {Platform, StyleSheet,View, Text} from 'react-native';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducers from './reducers'
+import { connect } from 'react-redux'
 import {Header} from './components/common'
 import SeriesList from './components/SeriesList'
 import LoginForm from './components/LoginForm'
-
-
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -36,5 +35,4 @@ class App extends Component {
     )
   }
 }
-
-export default App;
+export default App
