@@ -1,21 +1,10 @@
 import React,{Component} from 'react'
 import { Text } from 'react-native'
 import { connect } from 'react-redux'
-import { onEmailChanged, onPasswordChanged, errorMessage, clearError, isLoading, storeAuthToken} from '../actions'
+import { onEmailChanged, onPasswordChanged, isLoading, storeAuthToken, loginUser} from '../actions'
 import {Card, CardSection,Button,Input,Spinner} from './common'
+
 class LoginForm extends Component {
-
-    constructor(props){
-        super(props);
-        
-        this.state={
-            loading:false,
-            loginAttempts:0,
-            authTOKEN:''
-        }
-        this.onLoginPress = this.onLoginPress.bind(this)
-    }
-
 
     onEmailChanged(text){
         this.props.onEmailChanged(text)
@@ -26,39 +15,8 @@ class LoginForm extends Component {
     }
 
     onLoginPress(e) {
-        this.setState({
-            loading:true
-        })
-        fetch('http://localhost:3000/authenticate',{
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: this.props.email,
-                password: this.props.password
-            })
-        })
-        .then(response => {
-            if (response.ok){
-                this.props.storeAuthToken(JSON.parse(response._bodyInit).auth_token)
-                this.props.clearError()
-                this.props.isLoading(false)
-            }
-            if (!response.ok) { throw response }
-        })
-        .catch(err => {
-            this.onLoginFail(err)
-        })
-    }
-    
-    onLoginFail(err){
-        if(this.props.email === "" && this.props.password === ""){
-            this.props.errorMessage("Please fill out required fields")
-        } else {
-            this.props.errorMessage(err.text()._55)
-        }
+        const {email, password} = this.props
+        this.props.loginUser({email,password})
     }
 
     renderButton(){
@@ -69,12 +27,11 @@ class LoginForm extends Component {
         return(
             <Button
                 buttonText={"Login"}
-                onPress={this.onLoginPress}
+                onPress={this.onLoginPress.bind(this)}
             />
         )
     }
 
-   
 
     render(){
         return(
@@ -98,7 +55,7 @@ class LoginForm extends Component {
                 </CardSection>
 
                 <Text style={styles.errorMessage}>
-                    {this.props.authToken}
+                    {this.props.error}
                 </Text>
 
                 <CardSection>
@@ -124,15 +81,15 @@ const mapStateToProps = state =>{
         password:state.auth.password,
         error:state.auth.error,
         loading:state.auth.loading,
-        authToken:state.auth.authToken
+        authToken:state.auth.authToken,
+        user:state.auth.user
     }
 }
 
 export default connect(mapStateToProps,{
     onEmailChanged,
     onPasswordChanged,
-    errorMessage,
-    clearError,
     isLoading,
-    storeAuthToken
+    storeAuthToken,
+    loginUser
 })(LoginForm);

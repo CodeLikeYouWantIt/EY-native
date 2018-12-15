@@ -2,9 +2,9 @@ import {
     EMAIL_CHANGED,
     PASSWORD_CHANGED,
     ERROR_MESSAGE,
-    CLEAR_ERROR,     
     LOADING,
-    AUTH_TOKEN
+    AUTH_TOKEN,
+    LOGIN_USER_SUCCESS
         } from './types'
 
 export const onEmailChanged = (text) => {
@@ -21,20 +21,6 @@ export const onPasswordChanged = (text) => {
     }
 }
 
-export const errorMessage = (text) =>{
-    return{
-        type:ERROR_MESSAGE,
-        payload:text
-    }
-}
-
-export const clearError = () => {
-    return {
-        type: CLEAR_ERROR,
-        payload: ""
-    }
-}
-
 export const isLoading = (text) => {
     return {
         type: LOADING,
@@ -46,5 +32,44 @@ export const storeAuthToken = (text) => {
     return {
         type: AUTH_TOKEN,
         payload: text
+    }
+}
+
+export const loginUser= ({email,password}) =>{
+    return (dispatch)=>{
+        fetch('http://localhost:3000/authenticate',{
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password:password
+            })
+        })
+        .then(user => {
+            dispatch({
+                type:LOGIN_USER_SUCCESS,
+                payload: JSON.parse(user._bodyInit).auth_token
+            })
+        }).catch(() =>{
+            fetch('http://localhost:3000/authenticate', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }).then(error => {
+                dispatch({
+                    type: ERROR_MESSAGE,
+                    payload: error._bodyInit
+                })
+            })
+        })
     }
 }
