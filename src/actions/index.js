@@ -42,7 +42,7 @@ export const loginUser= ({email,password}) =>{
                 type:LOGIN_USER_SUCCESS,
                 payload: JSON.parse(user._bodyInit)
             })
-            Actions.seriesList()
+            Actions.main()
         }).catch(() =>{
             fetch('http://localhost:3000/authenticate', {
                 method: 'POST',
