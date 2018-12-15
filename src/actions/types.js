@@ -1,4 +1,6 @@
 export const EMAIL_CHANGED= 'email_changed'
 export const PASSWORD_CHANGED= 'password_changed'
-export const CLEAR_EMAIL = 'clear_email'
-export const CLEAR_PASSWORD = 'clear_password'
+export const ERROR_MESSAGE = 'error_message'
+export const CLEAR_ERROR = 'clear_error'
+export const LOADING = 'loading'
+export const AUTH_TOKEN= 'auth_token'

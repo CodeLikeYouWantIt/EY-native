@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import { Text } from 'react-native'
 import { connect } from 'react-redux'
-import { onEmailChanged, onPasswordChanged, clearEmail} from '../actions'
+import { onEmailChanged, onPasswordChanged, errorMessage, clearError, isLoading, storeAuthToken} from '../actions'
 import {Card, CardSection,Button,Input,Spinner} from './common'
 class LoginForm extends Component {
 
@@ -9,14 +9,11 @@ class LoginForm extends Component {
         super(props);
         
         this.state={
-            status:'',
-            error:'',
             loading:false,
             loginAttempts:0,
             authTOKEN:''
         }
         this.onLoginPress = this.onLoginPress.bind(this)
-        this.onLoginSuccess = this.onLoginSuccess.bind(this)
     }
 
 
@@ -26,10 +23,6 @@ class LoginForm extends Component {
 
     onPasswordChanged(text){
         this.props.onPasswordChanged(text)
-    }
-
-    clearEmail(){
-        this.props.clearEmail()
     }
 
     onLoginPress(e) {
@@ -49,71 +42,27 @@ class LoginForm extends Component {
         })
         .then(response => {
             if (response.ok){
-                this.clearEmail()
-                this.onLoginSuccess(response)
+                this.props.storeAuthToken(JSON.parse(response._bodyInit).auth_token)
+                this.props.clearError()
+                this.props.isLoading(false)
             }
             if (!response.ok) { throw response }
         })
         .catch(err => {
             this.onLoginFail(err)
-            this.increaseLoginAttempts()
-            this.clearFields()
         })
     }
     
-    onLoginSuccess(response){
-        this.setState({
-            loading:false,
-            error:'',
-            authTOKEN: JSON.parse(response._bodyInit).auth_token
-        })
-    }
-
     onLoginFail(err){
-        this.setState({
-            error:''
-        })
-
         if(this.props.email === "" && this.props.password === ""){
-            this.setState({
-                error:"Please fill out required fields",
-                loading:false
-            })
+            this.props.errorMessage("Please fill out required fields")
         } else {
-            this.setState({
-                error: err.text()._55,
-                loading:false
-            })
-        }
-    }
-
-    clearFields(){
-        if(this.state.error === "Incorrect Password"){
-            this.setState({
-                password:''
-            })
-        } else {
-            this.setState({
-                email:'',
-                password:''
-            })
-        }
-    }
-
-    tooManyLoginAttempts(){
-        if(this.state.loginAttempts>3){
-            return  (<Text>Too many failed attempts</Text>)
-        }
-    }
-
-    increaseLoginAttempts(){
-        if(this.state.status ==="failed"){
-            this.state.loginAttempts += 1
+            this.props.errorMessage(err.text()._55)
         }
     }
 
     renderButton(){
-        if(this.state.loading){
+        if(this.props.loading){
             return <Spinner size={"small"}/>
         }
 
@@ -149,7 +98,7 @@ class LoginForm extends Component {
                 </CardSection>
 
                 <Text style={styles.errorMessage}>
-                    {this.state.error}
+                    {this.props.authToken}
                 </Text>
 
                 <CardSection>
@@ -172,12 +121,18 @@ const styles = {
 const mapStateToProps = state =>{
     return{
         email:state.auth.email,
-        password:state.auth.password
+        password:state.auth.password,
+        error:state.auth.error,
+        loading:state.auth.loading,
+        authToken:state.auth.authToken
     }
 }
 
 export default connect(mapStateToProps,{
     onEmailChanged,
     onPasswordChanged,
-    clearEmail
+    errorMessage,
+    clearError,
+    isLoading,
+    storeAuthToken
 })(LoginForm);
