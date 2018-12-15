@@ -3,7 +3,8 @@ import {
     PASSWORD_CHANGED,
     LOGIN_USER_SUCCESS,
     LOGIN_USER,
-    LOGIN_USER_FAIL
+    LOGIN_USER_FAIL,
+    LOGOUT_USER
         } from './types'
 
 import { Actions } from 'react-native-router-flux'
@@ -19,6 +20,12 @@ export const onPasswordChanged = (text) => {
     return {
         type:PASSWORD_CHANGED,
         payload:text
+    }
+}
+
+export const logoutUser = ()=>{
+    return {
+        type:LOGOUT_USER
     }
 }
 
