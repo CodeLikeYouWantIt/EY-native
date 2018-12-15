@@ -6,6 +6,8 @@ import {
     LOGIN_USER_FAIL
         } from './types'
 
+import { Actions } from 'react-native-router-flux'
+
 export const onEmailChanged = (text) => {
     return{
         type: EMAIL_CHANGED,
@@ -40,6 +42,7 @@ export const loginUser= ({email,password}) =>{
                 type:LOGIN_USER_SUCCESS,
                 payload: JSON.parse(user._bodyInit)
             })
+            Actions.seriesList()
         }).catch(() =>{
             fetch('http://localhost:3000/authenticate', {
                 method: 'POST',
