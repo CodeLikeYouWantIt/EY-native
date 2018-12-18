@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import  {ScrollView} from 'react-native'
+import  {FlatList} from 'react-native'
 import SeriesDetail from './SeriesDetail'
 import { connect } from 'react-redux'
 import {getSeriesList} from '../actions'
@@ -10,20 +10,20 @@ class SeriesList extends Component{
 
     componentDidMount(){
         this.props.getSeriesList(this.props.authToken)
-        this.timer = setInterval(() => this.props.getSeriesList(this.props.authToken), 300000)
+        this.timer = setInterval(() => this.props.getSeriesList(this.props.authToken), 30000)
     }
 
-    renderSeriesList() {
-        return this.props.seriesList.map((serie, index) =>
-            <SeriesDetail key={index} serie={serie} />
-        )
+    renderSeriesList(serie) {
+        return <SeriesDetail serie={serie}/>
     }
 
     render() {
         return (
-            <ScrollView>
-                {this.renderSeriesList()}
-            </ScrollView>
+            <FlatList
+            data={this.props.seriesList}
+            renderItem={this.renderSeriesList}
+            keyExtractor={(serie)=> serie.id.toString() }
+            />
         )
     }
 }
