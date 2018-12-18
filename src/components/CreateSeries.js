@@ -1,14 +1,18 @@
 import React,{Component} from 'react'
-import {Text} from 'react-native'
 import { connect } from 'react-redux'
-import { onSeriesUpdate } from '../actions'
-import { Card, CardSection, Button, Spinner, Input} from './common'
+import { SeriesUpdate, createSeries } from '../actions'
+import { Card, CardSection, Button, Input} from './common'
 
 
 class CreateSeries extends Component {
 
-    onSeriesUpdate(text){
-        this.props.onSeriesUpdate({prop:'seriesTitle', value:text})
+    onButtonPress(){
+        this.props.createSeries(
+            this.props.seriesTitle,
+            this.props.url,
+            this.props.userID,
+            this.props.authToken
+            )
     }
 
     render(){
@@ -16,23 +20,25 @@ class CreateSeries extends Component {
             <Card>
                 <CardSection>
                     <Input
-                        onChangeText={this.onSeriesUpdate.bind(this)}
+                        onChangeText={text=>this.props.SeriesUpdate({prop:'seriesTitle',value:text})}
                         label={"Title"}
                         value={this.props.seriesTitle}
-                    >
-                    </Input>
+                    />
                 </CardSection>
 
                 <CardSection>
-                    <Text>
-                        {this.props.seriesTitle}
-                    </Text>
+                    <Input
+                        onChangeText={text => this.props.SeriesUpdate({ prop: 'url', value: text })}
+                        label={"Image"}
+                        value={this.props.url}
+                    />
                 </CardSection>
 
                 <CardSection>
                     <Button
                         size={"small"}
                         buttonText={"Create"}
+                        onPress={this.onButtonPress.bind(this)}
                     />
                 </CardSection>
             </Card>
@@ -40,8 +46,9 @@ class CreateSeries extends Component {
     }
 }
 
-const mapStateToProps=({series})=>{
-    const {seriesTitle} = series
-    return{ seriesTitle }
+const mapStateToProps=({series,auth})=>{
+    const {seriesTitle, url} = series
+    const {authToken,userID} = auth
+    return{ seriesTitle , url, authToken,userID}
 }
-export default connect(mapStateToProps,{onSeriesUpdate})(CreateSeries)
+export default connect(mapStateToProps,{SeriesUpdate,createSeries})(CreateSeries)
