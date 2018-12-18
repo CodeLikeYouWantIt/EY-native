@@ -9,7 +9,8 @@ const INITIAL_STATE = { email:'',
                         password:'',
                         error:'',
                         loading:false,
-                        authToken: ''
+                        authToken: '',
+                        userID:''
                     }
 
 export default (state= INITIAL_STATE,action) => {
@@ -31,7 +32,8 @@ export default (state= INITIAL_STATE,action) => {
                         authToken: action.payload.auth_token,
                         error: '',
                         loading: false,
-                        password:''
+                        password:'',
+                        userID: action.payload.user_id
                     }
 
         case LOGIN_USER_FAIL:

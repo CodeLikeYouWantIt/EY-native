@@ -12,9 +12,6 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
 import ReduxThunk from 'redux-thunk'
-import {Header} from './components/common'
-import SeriesList from './components/SeriesList'
-import LoginForm from './components/LoginForm'
 import RouterComponent from './Router'
 
 
@@ -30,7 +27,7 @@ class App extends Component {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
     return(
     <Provider store={store}>
-      <View style={{flex:1}}>
+      <View style={{flex:1,backgroundColor:'#fff'}}>
         <RouterComponent/>
       </View>
     </Provider>
@@ -38,4 +35,5 @@ class App extends Component {
     )
   }
 }
+
 export default App

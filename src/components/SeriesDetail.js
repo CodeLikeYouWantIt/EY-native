@@ -4,7 +4,7 @@ import {Card,CardSection,Button} from './common'
 
 
 const SeriesDetail = ({serie}) => {
-    const {url,title,user_id}= serie
+    const {url,title}= serie
     const {
         image,
         imageText,
@@ -16,18 +16,11 @@ const SeriesDetail = ({serie}) => {
                 <ImageBackground
                     style={image}
                     source={{ uri: url }}
-                    blurRadius={4}>
+                    blurRadius={2}>
                     <Text style={imageText}>
                         {title}
                     </Text>
                 </ImageBackground>               
-            </CardSection>
-
-            <CardSection>
-                <Button 
-                    onPress={()=>Linking.openURL(url)} 
-                    buttonText={"Click Me"}
-                />
             </CardSection>
         </Card>
     )
