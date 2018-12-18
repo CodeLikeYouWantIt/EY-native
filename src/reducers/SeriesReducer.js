@@ -1,8 +1,9 @@
-import { SERIES_TITLE, CREATE_SERIES_SUCCESS } from '../actions/types'
+import { SERIES_TITLE, CREATE_SERIES_SUCCESS, ON_SERIES_SUCCESS } from '../actions/types'
 
 const INITIAL_STATE = {
     seriesTitle:'',
-    url:''
+    url:'',
+    seriesList:[]
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -12,7 +13,10 @@ export default (state = INITIAL_STATE, action) => {
 
         case CREATE_SERIES_SUCCESS:
             return {...state, ...INITIAL_STATE}
-            
+
+        case ON_SERIES_SUCCESS:
+            return {...state, seriesList:action.payload}
+        
         default:
             return state
     }

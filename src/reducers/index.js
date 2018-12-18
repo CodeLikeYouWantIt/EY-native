@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import AuthReducer from './AuthReducer'
-import SeriesUpdateForm from './SeriesUpdateForm'
+import SeriesReducer from './SeriesReducer'
 
 export default combineReducers({
     auth: AuthReducer,
-    series:SeriesUpdateForm
+    series:SeriesReducer
 })
