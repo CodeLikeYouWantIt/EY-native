@@ -34,6 +34,7 @@ class RouterComponent extends Component {
                             key="seriesList"
                             component={SeriesList}
                             title="Series"
+                            initial={true}
                         />
                         <Scene
                             key="createSeries"
