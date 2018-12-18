@@ -1,4 +1,4 @@
-import {SERIES_TITLE, CREATE_SERIES_SUCCESS} from '../actions/types'
+import {SERIES_TITLE, CREATE_SERIES_SUCCESS, ON_SERIES_SUCCESS} from '../actions/types'
 import {Actions} from 'react-native-router-flux'
 
 export const SeriesUpdate = ({prop,value}) => {
@@ -28,6 +28,24 @@ export const createSeries = (title,url,userID,token) => {
                 type:CREATE_SERIES_SUCCESS
             })
             Actions.seriesList()
+        })
+    }
+}
+
+export const getSeriesList = (token) => {
+    return(dispatch)=>{
+        fetch('http://localhost:3000/series',{
+            method:'GET',
+            headers:{
+                Authorization:token,
+                'Content-type':'application/json'
+            }
+        })
+        .then(response => response.json()).then((data) => {
+            dispatch({
+                type:ON_SERIES_SUCCESS,
+                payload:data
+            })
         })
     }
 }

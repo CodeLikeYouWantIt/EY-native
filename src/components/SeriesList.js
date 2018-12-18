@@ -2,34 +2,19 @@ import React,{ Component } from 'react'
 import  {ScrollView} from 'react-native'
 import SeriesDetail from './SeriesDetail'
 import { connect } from 'react-redux'
+import {getSeriesList} from '../actions'
 
 
 
 class SeriesList extends Component{
 
-    constructor(){
-        super()
-        this.state = { 
-            series: [] 
-        }
+    componentDidMount(){
+        this.props.getSeriesList(this.props.authToken)
+        this.timer = setInterval(() => this.props.getSeriesList(this.props.authToken), 300000)
     }
 
-    componentWillMount(){
-        fetch("http://localhost:3000/series",{
-            method: 'GET',
-            headers:{
-                Authorization:this.props.authToken,
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json()).then((data)=>{
-            this.setState({series:data})
-        })
-    }
-    
     renderSeriesList() {
-        return this.state.series.map((serie, index) =>
+        return this.props.seriesList.map((serie, index) =>
             <SeriesDetail key={index} serie={serie} />
         )
     }
@@ -43,9 +28,10 @@ class SeriesList extends Component{
     }
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({auth,series}) => {
     const {authToken} = auth
-    return{authToken}
+    const {seriesList} = series
+    return{authToken, seriesList}
 }
 
-export default connect(mapStateToProps)(SeriesList);
+export default connect(mapStateToProps,{getSeriesList})(SeriesList);
