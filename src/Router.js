@@ -6,6 +6,7 @@ import CreateSeries from './components/CreateSeries'
 import {Actions} from 'react-native-router-flux'
 import {logoutUser} from './actions'
 import {connect} from 'react-redux'
+import PostsList from './components/PostsList'
 
 class RouterComponent extends Component {
 
@@ -40,6 +41,11 @@ class RouterComponent extends Component {
                             key="createSeries"
                             component={CreateSeries}
                             title="Series"
+                        />
+                        <Scene
+                            key="showPosts"
+                            component={PostsList}
+                            title="Posts"
                         />
                     </Scene>
                 </Scene>
