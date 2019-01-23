@@ -12,3 +12,4 @@ export const CREATE_SERIES_SUCCESS = 'create_series_success'
 export const ON_SERIES_SUCCESS ='on_series_success'
 
 export const SELECTED_SERIES = 'selected_series'
+export const GET_POSTS = 'get_posts'
