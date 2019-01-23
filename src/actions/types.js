@@ -10,3 +10,6 @@ export const LOGOUT_USER = 'logout_user'
 export const SERIES_TITLE = 'series_title'
 export const CREATE_SERIES_SUCCESS = 'create_series_success'
 export const ON_SERIES_SUCCESS ='on_series_success'
+
+export const SELECTED_SERIES = 'selected_series'
+export const GET_POSTS = 'get_posts'
