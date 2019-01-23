@@ -1,15 +1,10 @@
 import React,{Component} from 'react';
 import {Text,ImageBackground,TouchableHighlight} from 'react-native'
-import {Actions} from 'react-native-router-flux'
-import {Card,CardSection} from './common'
-import PostsDetails from './PostsDetails'
+import { Card,CardSection} from './common'
+import { connect } from 'react-redux'
+import { updateSelectedSeriesId } from '../actions'
 
 class SeriesDetail extends Component {
-
-    showSeriesPost(){
-        Actions.showPosts()
-    }
-
     render(){
         const {id,url,title}= this.props.serie.item
         const {
@@ -19,7 +14,7 @@ class SeriesDetail extends Component {
 
         return(
             <Card>
-                <TouchableHighlight onPress={this.showSeriesPost}>
+                <TouchableHighlight onPress={() => this.props.updateSelectedSeriesId(id)}>
                     <CardSection>  
                         <ImageBackground
                             style={image}
@@ -51,8 +46,4 @@ const styles = {
     }
 }
 
-
-
-
-
-export default SeriesDetail;
+export default connect(null, { updateSelectedSeriesId })(SeriesDetail);
