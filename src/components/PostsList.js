@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getPosts } from '../actions'
 
 class PostsList extends Component {
-    componentDidMount(){
+    componentWillMount(){
         this.props.getPosts(this.props.authToken,this.props.seriesId)
     }
 
@@ -12,7 +12,7 @@ class PostsList extends Component {
         return (
             <View>
                 <Text>
-                    {this.props.seriesId}
+                    {this.props.seriesPosts.length}
                 </Text>
             </View>
         )
