@@ -27,7 +27,7 @@ class App extends Component {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
     return(
     <Provider store={store}>
-      <View style={{flex:1,backgroundColor:'#fff'}}>
+      <View style={{flex:1}}>
         <RouterComponent/>
       </View>
     </Provider>

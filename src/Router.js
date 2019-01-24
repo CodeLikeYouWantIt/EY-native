@@ -18,7 +18,7 @@ class RouterComponent extends Component {
     render(){
         return (
             <Router>
-                <Scene key="root" hideNavBar>
+                <Scene key="root" hideNavBar style={{backgroundColor:'#ffffff'}} >
                     <Scene key="auth">
                         <Scene
                             key="login"
@@ -43,6 +43,8 @@ class RouterComponent extends Component {
                             title="Series"
                         />
                         <Scene
+                            rightTitle="Create New Post"
+                            onRight=""
                             key="showPosts"
                             component={PostsList}
                             title="Posts"
