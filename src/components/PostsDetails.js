@@ -1,14 +1,12 @@
 import React from 'react';
-import { Text, Image, View, ImageBackground } from 'react-native'
+import { Text,View } from 'react-native'
 import {Card,CardSection} from './common'
 
 
-const PostsDetails = ({ serie }) => {
-    const { id,itle} = serie
+const PostsDetails = ({ post }) => {
+    const { id,name,body} = post.item
 
     const {
-        thumbnailContainerStyle,
-        thumbnailStyle,
         headerTextStyle,
         headerContentStyle
     } = styles
@@ -17,7 +15,7 @@ const PostsDetails = ({ serie }) => {
         <Card>
             <CardSection>
                 <View style={headerContentStyle}>
-                    <Text style={headerTextStyle}>{id}</Text>
+                    <Text style={headerTextStyle}>{body}</Text>
                 </View>
             </CardSection>
         </Card>
