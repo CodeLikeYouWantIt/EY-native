@@ -10,7 +10,7 @@ class SeriesList extends Component{
 
     componentDidMount(){
         this.props.getSeriesList(this.props.authToken)
-        this.timer = setInterval(() => this.props.getSeriesList(this.props.authToken), 30000)
+        // this.timer = setInterval(() => this.props.getSeriesList(this.props.authToken), 30000)
     }
 
     renderSeriesList(serie) {
