@@ -15,7 +15,7 @@ const PostsDetails = ({ post }) => {
         <Card>
             <CardSection>
                 <View style={headerContentStyle}>
-                    <Text style={headerTextStyle}>{body}</Text>
+                    <Text style={headerTextStyle}>{name}</Text>
                 </View>
             </CardSection>
         </Card>
