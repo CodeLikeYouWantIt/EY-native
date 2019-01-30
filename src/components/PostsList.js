@@ -3,6 +3,7 @@ import PostsDetails from './PostsDetails'
 import {FlatList} from 'react-native'
 import { connect } from 'react-redux'
 import { getPosts } from '../actions'
+import {Card} from './common'
 
 class PostsList extends Component {
     componentWillMount(){
@@ -15,11 +16,13 @@ class PostsList extends Component {
 
     render (){
         return (
-            <FlatList
-                data={this.props.seriesPosts}
-                renderItem = {this.renderPostsList}
-                keyExtractor={(post)=> post.id.toString()}
-            />
+            <Card>
+                <FlatList
+                    data={this.props.seriesPosts}
+                    renderItem = {this.renderPostsList}
+                    keyExtractor={(post)=> post.id.toString()}
+                />
+            </Card>
         )
     }
 }

@@ -2,7 +2,8 @@ import{GET_POSTS} from '../actions/types'
 
 
 const INITIAL_STATE= {
-    seriesPosts:[]
+    seriesPosts:[],
+    deletedPost:""
 }
 
 export default (state=INITIAL_STATE,action) => {

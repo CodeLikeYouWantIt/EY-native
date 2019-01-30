@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 import {Text,ImageBackground,TouchableHighlight} from 'react-native'
-import { Card,CardSection} from './common'
+import { Card,CardSection,Button} from './common'
 import { connect } from 'react-redux'
-import { updateSelectedSeriesId } from '../actions'
+import { updateSelectedSeriesId,deleteSeries } from '../actions'
 
 class SeriesDetail extends Component {
     render(){
@@ -23,7 +23,11 @@ class SeriesDetail extends Component {
                             <Text style={imageText}>
                                 {title}
                             </Text>
-                        </ImageBackground>               
+                        </ImageBackground>   
+                        <Button
+                            buttonText={"Delete"}
+                            onPress={()=>this.props.deleteSeries(this.props.authToken,id)}
+                        />       
                     </CardSection>
                 </TouchableHighlight>
             </Card>
@@ -46,4 +50,9 @@ const styles = {
     }
 }
 
-export default connect(null, { updateSelectedSeriesId })(SeriesDetail);
+const mapStateToProps = ({ auth, selectedSeries})=>{
+    const {authToken} = auth
+    const {seriesId} = selectedSeries
+    return {authToken,seriesId}
+}
+export default connect(mapStateToProps, { updateSelectedSeriesId, deleteSeries })(SeriesDetail);
