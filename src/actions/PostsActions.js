@@ -1,4 +1,4 @@
-import { GET_POSTS } from '../actions/types'
+import { GET_POSTS, DELETE_POST} from '../actions/types'
 
 export const getPosts = (token,seriesId)=> {
     return(dispatch)=>{
@@ -16,4 +16,14 @@ export const getPosts = (token,seriesId)=> {
             })
         })
     }
+}
+
+export const deletePost= (token, id)=>{
+    fetch("http://localhost:3000/posts/"+id,{
+        method:'POST',
+        headers: {
+            Authorization: token,
+            'Content-type': 'application/json'
+        }
+    }).then(response => response.json())
 }

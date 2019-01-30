@@ -25,10 +25,11 @@ const PostsDetails = ({ post }) => {
 const styles = {
     headerContentStyle: {
         flexDirection: 'column',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        topMargin: 1
     },
     headerTextStyle: {
-        fontSize: 18
+        fontSize: 20
     },
     thumbnailStyle: {
         height: 50,

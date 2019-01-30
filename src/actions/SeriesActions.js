@@ -1,4 +1,4 @@
-import {SERIES_TITLE, CREATE_SERIES_SUCCESS, ON_SERIES_SUCCESS} from '../actions/types'
+import {SERIES_TITLE, CREATE_SERIES_SUCCESS, ON_SERIES_SUCCESS,DELETE_SERIES} from '../actions/types'
 import {Actions} from 'react-native-router-flux'
 
 export const SeriesUpdate = ({prop,value}) => {
@@ -52,3 +52,18 @@ export const getSeriesList = (token) => {
 
 
 
+export const deleteSeries = (token, id) => {
+    return(dispatch)=> {
+        fetch("http://localhost:3000/series", {
+            method: 'DELETE',
+            headers: {
+                Authorization: token,
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                id:id
+            })
+        }).then(response => Actions.seriesList())
+        .catch(error => console.log(error))
+    }
+}
