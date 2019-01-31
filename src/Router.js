@@ -44,7 +44,7 @@ class RouterComponent extends Component {
                         />
                         <Scene
                             rightTitle="Create New Post"
-                            onRight=""
+                            onRight={()=>{Actions.createSeries() }}
                             key="showPosts"
                             component={PostsList}
                             title="Posts"

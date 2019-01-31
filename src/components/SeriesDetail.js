@@ -19,15 +19,16 @@ class SeriesDetail extends Component {
                         <ImageBackground
                             style={image}
                             source={{ uri: url }}
-                            blurRadius={2}>
+                            blurRadius={2}
+                            >
                             <Text style={imageText}>
                                 {title}
                             </Text>
-                        </ImageBackground>   
                         <Button
                             buttonText={"Delete"}
-                            onPress={()=>this.props.deleteSeries(this.props.authToken,id)}
-                        />       
+                            onPress={() => this.props.deleteSeries(this.props.authToken, id)}
+                        />    
+                        </ImageBackground>     
                     </CardSection>
                 </TouchableHighlight>
             </Card>
@@ -37,9 +38,9 @@ class SeriesDetail extends Component {
 
 const styles = {
     image:{
-        height:300,
+        height:250,
         flex: 1,
-        width:null,
+        width:250,
         justifyContent: 'center',
         alignItems: 'center'
     },
