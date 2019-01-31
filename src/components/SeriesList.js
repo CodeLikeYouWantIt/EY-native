@@ -1,5 +1,5 @@
 import React,{ Component } from 'react'
-import  {FlatList} from 'react-native'
+import  {FlatList,View} from 'react-native'
 import SeriesDetail from './SeriesDetail'
 import { connect } from 'react-redux'
 import {getSeriesList} from '../actions'
@@ -19,12 +19,22 @@ class SeriesList extends Component{
 
     render() {
         return (
-            <FlatList
-            data={this.props.seriesList}
-            renderItem={this.renderSeriesList}
-            keyExtractor={(serie)=> serie.id.toString() }
-            />
+            <View style={styles.centerBG}>
+                <FlatList
+                data={this.props.seriesList}
+                renderItem={this.renderSeriesList}
+                keyExtractor={(serie)=> serie.id.toString() }
+                horizontal={true}
+                />
+            </View>
         )
+    }
+}
+
+const styles = {
+    centerBG: {
+        flex:1,
+        backgroundColor:'#fff'
     }
 }
 
