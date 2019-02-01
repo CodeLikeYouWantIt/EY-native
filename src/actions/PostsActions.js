@@ -55,7 +55,7 @@ export const createPosts = (token,seriesID,userID, body, name)=>{
             dispatch({
                 type: CREATE_POST_SUCCESS
             })
-            Actions.showPosts()
+            Actions.createSeries()
         }).catch(error=>console.log(error))
     }
 }
