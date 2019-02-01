@@ -35,7 +35,7 @@ class SeriesList extends Component{
 
                 <CardSection>
                     <Text style={styles.containerStyle}>
-                        Something Goes here
+                        Something Else Here
                     </Text>
                 </CardSection>
             </Card >
@@ -57,7 +57,7 @@ const styles = {
         justifyContent: 'center',
         borderBottomColor: 'red',
         borderBottomWidth: 2,
-        marginBottom: 30
+        height:100
     }
 }
 

@@ -4,7 +4,7 @@ import {Card,CardSection} from './common'
 
 
 const PostsDetails = ({ post }) => {
-    const { id,name,body} = post.item
+    const {name,body} = post.item
 
     const {
         header,

@@ -31,7 +31,7 @@ class RouterComponent extends Component {
                         <Scene
                             leftTitle="Logout"
                             onLeft={this.onLogout.bind(this)}
-                            rightTitle="Add"
+                            rightTitle="New Series"
                             onRight={() => { Actions.createSeries() }}
                             key="seriesList"
                             component={SeriesList}
