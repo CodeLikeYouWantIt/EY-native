@@ -1,15 +1,17 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { Hoshi } from 'react-native-textinput-effects';
 
-const Input = ({label,placeHolder,value,onChangeText,secureTextEntry})=>{
-    const {inputStyle,labelStyle,containerStyle}=styles
+const Input = ({label,placeHolder,value,onChangeText,secureTextEntry,numberOfLines,multiLine})=>{
+    const {inputStyle,containerStyle}=styles
     return(
         <View style={containerStyle}>
             <Hoshi
                 label = {label}
                 borderColor={'#b76c94'}
                 backgroundColor={'#FFF'}
+                numberOfLines={numberOfLines}
+                multiLine={multiLine}
 
                 secureTextEntry={secureTextEntry}
                 autoCorrect={false}
@@ -26,17 +28,12 @@ const Input = ({label,placeHolder,value,onChangeText,secureTextEntry})=>{
 
 const styles = {
     inputStyle:{
-        color:"#000",
+        color:"#1b1b1b",
         paddingRight: 5,
         paddingLeft:5,
         fontSize:18,
         lineHeight:23,
         flex:2
-    },
-    labelStyle:{
-        fontSize:18,
-        paddingLeft:20,
-        flex:1
     },
     containerStyle:{
         height:60,

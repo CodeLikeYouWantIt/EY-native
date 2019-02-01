@@ -5,7 +5,6 @@ import { Card, CardSection, Button, Input} from './common'
 
 
 class CreateSeries extends Component {
-
     onButtonPress(){
         this.props.createSeries(
             this.props.seriesTitle,

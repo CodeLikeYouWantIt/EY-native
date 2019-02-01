@@ -3,6 +3,7 @@ import {Scene, Router} from 'react-native-router-flux'
 import LoginForm from './components/LoginForm'
 import SeriesList from './components/SeriesList';
 import CreateSeries from './components/CreateSeries'
+import CreatePosts from './components/CreatePosts'
 import {Actions} from 'react-native-router-flux'
 import {logoutUser} from './actions'
 import {connect} from 'react-redux'
@@ -44,10 +45,15 @@ class RouterComponent extends Component {
                         />
                         <Scene
                             rightTitle="Create New Post"
-                            onRight={()=>{Actions.createSeries() }}
+                            onRight={()=>{Actions.newPost() }}
                             key="showPosts"
                             component={PostsList}
                             title="Posts"
+                        />
+                        <Scene
+                            key="newPost"
+                            component={CreatePosts}
+                            title="New Post"
                         />
                     </Scene>
                 </Scene>

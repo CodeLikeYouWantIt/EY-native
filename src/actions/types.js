@@ -14,5 +14,7 @@ export const SELECTED_SERIES = 'selected_series'
 export const DELETE_SERIES = 'delete_series'
 
 
+export const CREATE_POST_SUCCESS = 'create_post_success'
 export const GET_POSTS = 'get_posts'
 export const DELETE_POST= 'delete_post'
+export const POST_ATTR = 'post_attr'

@@ -24,13 +24,15 @@ class SeriesDetail extends Component {
                             <Text style={imageText}>
                                 {title}
                             </Text>
-                        <Button
-                            buttonText={"Delete"}
-                            onPress={() => this.props.deleteSeries(this.props.authToken, id)}
-                        />    
                         </ImageBackground>     
                     </CardSection>
                 </TouchableHighlight>
+                <CardSection>
+                    <Button
+                        buttonText={"Delete"}
+                        onPress={() => this.props.deleteSeries(this.props.authToken, id)}
+                    />    
+                </CardSection>
             </Card>
         )
     }
@@ -38,9 +40,8 @@ class SeriesDetail extends Component {
 
 const styles = {
     image:{
-        height:250,
-        flex: 1,
-        width:250,
+        height:300,
+        width:300,
         justifyContent: 'center',
         alignItems: 'center'
     },
