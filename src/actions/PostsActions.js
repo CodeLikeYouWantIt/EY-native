@@ -1,4 +1,5 @@
-import { GET_POSTS, DELETE_POST} from '../actions/types'
+import { GET_POSTS, DELETE_POST, CREATE_POST_SUCCESS, POST_ATTR} from '../actions/types'
+import {Actions} from 'react-native-router-flux'
 
 export const getPosts = (token,seriesId)=> {
     return(dispatch)=>{
@@ -26,4 +27,35 @@ export const deletePost= (token, id)=>{
             'Content-type': 'application/json'
         }
     }).then(response => response.json())
+}
+
+export const PostsUpdate = ({ prop, value }) => {
+    return {
+        type: POST_ATTR,
+        payload: { prop, value }
+    }
+}
+
+export const createPosts = (token,seriesID,userID, body, name)=>{
+    return(dispatch)=>{
+        fetch('http://localhost:3000/posts',{
+            method:'POST',
+            headers:{
+                Authorization:token,
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                body: body,
+                user_id: userID,
+                series_id: seriesID
+            })
+        })
+        .then(() => {
+            dispatch({
+                type: CREATE_POST_SUCCESS
+            })
+            Actions.showPosts()
+        }).catch(error=>console.log(error))
+    }
 }

@@ -63,7 +63,7 @@ export const deleteSeries = (token, id) => {
             body: JSON.stringify({
                 id:id
             })
-        }).then(response => Actions.seriesList())
+        }).then(()=> Actions.seriesList())
         .catch(error => console.log(error))
     }
 }

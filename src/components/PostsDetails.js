@@ -7,15 +7,17 @@ const PostsDetails = ({ post }) => {
     const { id,name,body} = post.item
 
     const {
+        header,
         headerTextStyle,
         headerContentStyle
     } = styles
 
     return (
         <Card>
+            <Text style={header}>{name}</Text>
             <CardSection>
                 <View style={headerContentStyle}>
-                    <Text style={headerTextStyle}>{name}</Text>
+                    <Text style={headerTextStyle}>{body}</Text>
                 </View>
             </CardSection>
         </Card>
@@ -29,7 +31,18 @@ const styles = {
         topMargin: 1
     },
     headerTextStyle: {
-        fontSize: 20
+        color: "#1b1b1b",
+        margin:5,
+        paddingRight: 5,
+        paddingLeft: 5,
+        fontSize: 18,
+        lineHeight: 32,
+        flex: 1,
+        letterSpacing: 1.0
+    },
+    header:{
+        fontSize:30,
+        color:'#1b1b1b',
     },
     thumbnailStyle: {
         height: 50,
